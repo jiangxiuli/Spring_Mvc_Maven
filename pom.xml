@@ -228,6 +228,7 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<defaultGoal>compile</defaultGoal>
 		<finalName>spring_mvc_maven</finalName>
 		<plugins>
 			<plugin>
