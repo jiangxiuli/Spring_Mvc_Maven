@@ -1,0 +1,22 @@
+#redis setting  
+redis.host1=192.168.189.128
+redis.port1=6379  
+redis.host2=192.168.189.128
+redis.port2=6380
+redis.host3=192.168.189.128
+redis.port3=6381 
+redis.host4=192.168.189.128
+redis.port4=6382 
+redis.host5=192.168.189.128
+redis.port5=6383 
+redis.host6=192.168.189.128
+redis.port6=6384 
+  
+#jedis setting  6
+
+jedis.maxActive=100
+jedis.maxIdle=30  
+jedis.minIdle=30
+jedis.minEvictableIdleTimeMillis=300000  
+jedis.numTestsPerEvictionRun=3  
+jedis.timeBetweenEvictionRunsMillis=60000  

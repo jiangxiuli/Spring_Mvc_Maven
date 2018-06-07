@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- Jedis 连接池配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.maxTotal}" />
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+
+	<!-- Jedis ConnectionFactory 数据库连接配置 -->
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<property name="password" value="${redis.password}" />
+		<property name="poolConfig" ref="jedisPoolConfig" />
+	</bean>
+
+	<!-- redisTemplate配置，redisTemplate是对Jedis的对redis操作的扩展，有更多的操作，封装使操作更便捷 -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
+		<!-- 设置默认 Serializer ，包含 keySerializer & valueSerializer -->
+		<property name="defaultSerializer">
+			<bean
+				class="com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer" />
+		</property>
+		<!-- 单独设置 keySerializer -->
+		<property name="keySerializer">
+			<bean
+				class="com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer" />
+		</property>
+		<!-- 单独设置 valueSerializer -->
+		<property name="valueSerializer">
+			<bean
+				class="com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer" />
+		</property>
+	</bean>
+
+	<!-- 配置RedisCacheManager -->
+	<bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+		<constructor-arg name="redisOperations" ref="redisTemplate" />
+		<property name="defaultExpiration" value="${redis.expiration}" />
+	</bean>
+</beans>
