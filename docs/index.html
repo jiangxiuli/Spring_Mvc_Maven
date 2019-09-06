@@ -13,19 +13,26 @@
 
   <script>
     window.$docsify = {
+      // 文档左上面的名字
       name: 'test-doc',
+      // git地址
       repo: 'https://github.com/jiangxiuli/Spring_Mvc_Maven.git',
+      // 开启主页上面的导航栏
       loadNavbar: true,
+      // 开启侧边栏目录配置
       loadSidebar: true,
+      // 开启主页
       coverpage: true,
       auto2top: true,
       maxLevel: 2,
       subMaxLevel: 4,
+      // 搜索相关设置
       search: {
         placeholder: '搜索',
         noData: '找不到结果!',
         depth: 3
       },
+      // 侧边栏与导航栏的文件目录
       alias: {
         '/.*/_sidebar.md': '/_sidebar.md',//防止意外回退
         '/.*/_navbar.md': '/_navbar.md'
@@ -33,6 +40,7 @@
       ga: 'UA-144208445-1'
     }
   </script>
+  <!-- 各种插件位置 -->
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   <script src="//unpkg.com/docsify/lib/plugins/ga.js"></script>
   <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>

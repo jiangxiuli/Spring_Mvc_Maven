@@ -1,4 +1,4 @@
-  ![logo](images/mall.svg)
+  ![logo](images/zjj.jpeg)
   # Test-doc
   > doc学习教程，架构、业务、技术要点全方位解析。
 
